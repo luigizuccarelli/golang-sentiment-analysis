@@ -2,14 +2,23 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/luigizuccarelli/golang-sentiment-analysis/pkg/sentiment"
 )
 
 func main() {
-	fmt.Println("Executing training on english language")
-	//model, err := sentiment.Train(os.Args[1])
-	model, err := sentiment.Restore()
+	fmt.Println("Executing " + os.Args[1] + " on english language")
+
+	var model sentiment.Models
+	var err error
+
+	if os.Args[1] == "training" {
+		model, err = sentiment.Train(os.Args[2])
+	} else {
+		model, err = sentiment.Restore()
+	}
+
 	if err != nil {
 		panic(fmt.Sprintf("Could not restore model!\n\t%v\n", err))
 	}

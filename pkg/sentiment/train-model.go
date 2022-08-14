@@ -59,7 +59,7 @@ func TrainModel(file string, modelMap Models) error {
 	}
 
 	now := time.Now()
-	fmt.Printf("Starting munging to data at %v\n", now)
+	fmt.Printf("\nStart munging data from %s to model %v at %v\n", file, model, now)
 
 	close(stream)
 
@@ -75,6 +75,6 @@ func TrainModel(file string, modelMap Models) error {
 
 	modelMap[English] = model
 
-	fmt.Printf("\nFinished munging from to data\n\tdelta: %v\n\taverage time per line: %v\n", time.Now().Sub(now), time.Now().Sub(now)/time.Duration(int64(count)))
+	fmt.Printf("\nFinished munging from %s to data model\n\tdelta: %v\n\taverage time per line: %v\n", file, time.Now().Sub(now), time.Now().Sub(now)/time.Duration(int64(count)))
 	return nil
 }
